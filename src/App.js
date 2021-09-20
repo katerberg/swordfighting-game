@@ -1,19 +1,21 @@
-import Button from '@mui/material/Button';
+import React from 'react';
+import Choices from './Choices';
 import './App.css';
+import oxGuard from './images/guards/ox-guard.png';
 
 function App() {
   return (
     <div className="App">
       <div className="battlefield">
-          <img className="swordfighter" src="https://i.imgur.com/WRXGW2pg.png" alt="Swordfighting" />
-          <img className="monster" src="https://www.psyborg.com.au/wp-content/uploads/2011/11/Illustration-Monster.jpg" alt="Monster" />
+        <img alt="Swordfighting" className="swordfighter" src={oxGuard} />
+        <img
+          alt="Monster"
+          className="monster"
+          src="https://www.psyborg.com.au/wp-content/uploads/2011/11/Illustration-Monster.jpg"
+        />
       </div>
       <div className="distance">3.4m</div>
-      <div className="choices">
-        <Button variant="contained">Attack</Button>
-        <Button variant="outlined">Dodge</Button>
-        <Button variant="outlined">Move</Button>
-      </div>
+      <Choices />
     </div>
   );
 }
