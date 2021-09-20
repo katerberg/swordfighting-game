@@ -7,7 +7,7 @@ function mod(n, m) {
   return ((n % m) + m) % m;
 }
 
-export default function Choices({ onStanceSelect }) {
+export default function Choices({ onAttack, onStanceSelect }) {
   const LEFT = 37;
   const RIGHT = 39;
   const ENTER = 13;
@@ -17,10 +17,11 @@ export default function Choices({ onStanceSelect }) {
   const selectChoice = useCallback(
     (choice) => {
       onStanceSelect(strikes[choice].result.image);
+      onAttack(strikes[choice].damage);
       setChoices(strikes[choice].result.choices);
       setSelectedButton(strikes[choice].result.choices[0]);
     },
-    [onStanceSelect],
+    [onStanceSelect, onAttack],
   );
 
   const handleKeyDown = useCallback(
@@ -75,4 +76,5 @@ export default function Choices({ onStanceSelect }) {
 
 Choices.propTypes = {
   onStanceSelect: PropTypes.func.isRequired,
+  onAttack: PropTypes.func.isRequired,
 };

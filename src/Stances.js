@@ -40,26 +40,32 @@ const strikes = {
   oberhaw: {
     text: 'Oberhaw',
     result: stances.foolsGuard,
+    damage: 10,
   },
   underhaw: {
     text: 'Underhaw',
     result: stances.roofGuard,
+    damage: 8,
   },
   zornhaw: {
     text: 'Zornhaw',
     result: stances.tailGuard,
+    damage: 6,
   },
   punta: {
     text: 'Stechen',
     result: stances.longpointGuard,
+    damage: 5,
   },
   mittelhaw: {
     text: 'Mittelhaw',
     result: stances.plowGuard,
+    damage: 8,
   },
   zwerhaw: {
     text: 'Zwerhaw',
     result: stances.oxGuard,
+    damage: 3,
   },
 };
 
