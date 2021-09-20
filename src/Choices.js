@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useCallback } from 'react';
 import Choice from './Choice';
-import oxGuard from './images/guards/ox-guard.png';
-import roofGuard from './images/guards/roof-guard.png';
+import stances from './Stances';
 
 const choices = ['Attack', 'Dodge', 'Move'];
 function mod(n, m) {
@@ -26,9 +25,9 @@ export default function Choices({ onStanceSelect }) {
           break;
         case ENTER:
           if (currentIndex === choices.indexOf('Attack')) {
-            onStanceSelect(oxGuard);
+            onStanceSelect(stances.oxGuard.image);
           } else {
-            onStanceSelect(roofGuard);
+            onStanceSelect(stances.roofGuard.image);
           }
           break;
         default:
