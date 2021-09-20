@@ -1,14 +1,18 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect, useCallback } from 'react';
 import Choice from './Choice';
+import oxGuard from './images/guards/ox-guard.png';
+import roofGuard from './images/guards/roof-guard.png';
 
 const choices = ['Attack', 'Dodge', 'Move'];
 function mod(n, m) {
   return ((n % m) + m) % m;
 }
 
-function Choices() {
+export default function Choices({ onStanceSelect }) {
   const LEFT = 37;
   const RIGHT = 39;
+  const ENTER = 13;
   const [selectedButton, setSelectedButton] = useState('Attack');
   const handleKeyDown = useCallback(
     (event) => {
@@ -20,11 +24,18 @@ function Choices() {
         case RIGHT:
           setSelectedButton(choices[mod(currentIndex + 1, choices.length)]);
           break;
+        case ENTER:
+          if (currentIndex === choices.indexOf('Attack')) {
+            onStanceSelect(oxGuard);
+          } else {
+            onStanceSelect(roofGuard);
+          }
+          break;
         default:
           break;
       }
     },
-    [setSelectedButton, selectedButton],
+    [setSelectedButton, selectedButton, onStanceSelect],
   );
 
   useEffect(() => {
@@ -43,4 +54,6 @@ function Choices() {
   );
 }
 
-export default Choices;
+Choices.propTypes = {
+  onStanceSelect: PropTypes.func.isRequired,
+};

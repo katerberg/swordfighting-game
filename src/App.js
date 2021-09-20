@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Choices from './Choices';
 import './App.css';
 import oxGuard from './images/guards/ox-guard.png';
 
 function App() {
+  const [stance, setStance] = useState(oxGuard);
   return (
     <div className="App">
       <div className="battlefield">
-        <img alt="Swordfighting" className="swordfighter" src={oxGuard} />
+        <img alt="Swordfighting" className="swordfighter" src={stance} />
         <img
           alt="Monster"
           className="monster"
@@ -15,7 +16,7 @@ function App() {
         />
       </div>
       <div className="distance">3.4m</div>
-      <Choices />
+      <Choices onStanceSelect={setStance} />
     </div>
   );
 }
