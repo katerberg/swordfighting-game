@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/filename-case */
 /* eslint-disable-next-line no-undef */
 module.exports = {
   extends: [
@@ -139,7 +140,7 @@ module.exports = {
     'unicorn/filename-case': [
       'error',
       {
-        cases: { pascalCase: true, snakeCase: true },
+        cases: { pascalCase: true },
       },
     ],
     'unicorn/import-index': 'error',
