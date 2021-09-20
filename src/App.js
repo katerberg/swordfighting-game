@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Choices from './Choices';
 import './App.css';
-import oxGuard from './images/guards/ox-guard.png';
+import { stances } from './Stances';
 
 function App() {
-  const [stance, setStance] = useState(oxGuard);
+  const [stance, setStance] = useState(Object.values(stances)[0].image);
+  const [distance] = useState('3.4');
   return (
     <div className="App">
       <div className="battlefield">
@@ -15,7 +16,7 @@ function App() {
           src="https://www.psyborg.com.au/wp-content/uploads/2011/11/Illustration-Monster.jpg"
         />
       </div>
-      <div className="distance">3.4m</div>
+      <div className="distance">{`${distance}m`}</div>
       <Choices onStanceSelect={setStance} />
     </div>
   );

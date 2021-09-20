@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useCallback } from 'react';
 import Choice from './Choice';
-import stances from './Stances';
+import { strikes, stances } from './Stances';
 
-const choices = ['Attack', 'Dodge', 'Move'];
 function mod(n, m) {
   return ((n % m) + m) % m;
 }
@@ -12,7 +11,18 @@ export default function Choices({ onStanceSelect }) {
   const LEFT = 37;
   const RIGHT = 39;
   const ENTER = 13;
-  const [selectedButton, setSelectedButton] = useState('Attack');
+  const [selectedButton, setSelectedButton] = useState(Object.values(stances)[0].choices[0]);
+  const [choices, setChoices] = useState(Object.values(stances)[0].choices);
+
+  const selectChoice = useCallback(
+    (choice) => {
+      onStanceSelect(strikes[choice].result.image);
+      setChoices(strikes[choice].result.choices);
+      setSelectedButton(strikes[choice].result.choices[0]);
+    },
+    [onStanceSelect],
+  );
+
   const handleKeyDown = useCallback(
     (event) => {
       const currentIndex = choices.indexOf(selectedButton);
@@ -24,17 +34,21 @@ export default function Choices({ onStanceSelect }) {
           setSelectedButton(choices[mod(currentIndex + 1, choices.length)]);
           break;
         case ENTER:
-          if (currentIndex === choices.indexOf('Attack')) {
-            onStanceSelect(stances.oxGuard.image);
-          } else {
-            onStanceSelect(stances.roofGuard.image);
-          }
+          selectChoice(choices[currentIndex]);
           break;
         default:
           break;
       }
     },
-    [setSelectedButton, selectedButton, onStanceSelect],
+    [setSelectedButton, choices, selectChoice, selectedButton],
+  );
+
+  const handleSelect = useCallback(
+    (event) => {
+      const choice = event.target.id;
+      selectChoice(choice);
+    },
+    [selectChoice],
   );
 
   useEffect(() => {
@@ -47,7 +61,13 @@ export default function Choices({ onStanceSelect }) {
   return (
     <div className="choices">
       {choices.map((choice) => (
-        <Choice key={choice} selectedButton={selectedButton} text={choice} />
+        <Choice
+          choice={strikes[choice]}
+          id={choice}
+          key={choice}
+          onSelect={handleSelect}
+          selectedButton={selectedButton}
+        />
       ))}
     </div>
   );
